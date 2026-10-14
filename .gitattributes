@@ -1,0 +1,30 @@
+# ==========================================================================
+# 统一行尾符为 LF
+#
+# 原因：Git for Windows 默认 core.autocrlf=true，会在提交时把 CRLF 转成 LF、
+#       检出时再转回 CRLF，导致「git 算出的 blob 哈希」与「文件原始字节」不一致。
+#       一旦用工具直接按原始字节推送，就会出现混合行尾、diff 全文件变更的问题。
+# 这里显式声明：仓库内一律 LF，检出时也不要转换。
+# ==========================================================================
+
+* text=auto eol=lf
+
+# 二进制文件不做行尾转换
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
+*.pdf  binary
+
+# 明确文本类型
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.ps1  text eol=lf
+*.py   text eol=lf
