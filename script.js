@@ -69,13 +69,29 @@
   }
 
   /* ----------------------------------------------------------------------
-     联系按钮：由 SITE 数据生成，填了哪个显示哪个
+     联系按钮：由 contactCodes 解码后生成，避免明文出现在页面源码中
      ---------------------------------------------------------------------- */
   var CONTACT_FIELDS = [
     { key: "email",  label: "复制邮箱",  type: "copy" },
     { key: "wechat", label: "复制微信",  type: "copy" },
-    { key: "github", label: "GitHub",    type: "link", hrefPrefix: "" }
+    { key: "github", label: "GitHub",    type: "link" }
   ];
+
+  /** 字符码数组 → 明文字符串 */
+  function decodeCodes(arr) {
+    if (!Array.isArray(arr) || !arr.length) return "";
+    var s = "";
+    for (var i = 0; i < arr.length; i++) s += String.fromCharCode(arr[i]);
+    return s;
+  }
+
+  /** 取联系方式的明文：优先用字符码解码，兼容直接写字符串的老写法 */
+  function contactValue(key) {
+    var codes = (SITE.contactCodes || {})[key];
+    var v = decodeCodes(codes);
+    if (!v && typeof SITE[key] === "string") v = SITE[key];
+    return v || "";
+  }
 
   function renderContact() {
     var box = $("#contact-actions");
@@ -83,10 +99,11 @@
 
     var html = "";
     CONTACT_FIELDS.forEach(function (f) {
-      var val = SITE[f.key];
-      if (!has(val)) return;
+      var val = contactValue(f.key);
+      if (!val) return;
 
       if (f.type === "copy") {
+        // 明文只写进 data 属性，且按钮文案不含明文
         html += '<button class="btn btn--ghost" type="button" data-copy="' + esc(val) + '">' +
           esc(f.label) + "</button>";
       } else {
@@ -99,9 +116,16 @@
 
     if (!html) {
       html = '<p style="color:var(--text-subtle);font-size:14.5px;margin:0">' +
-        "请在 data/works.js 的 SITE 中填写联系方式（email / wechat / github）。</p>";
+        "请在 data/works.js 的 SITE.contactCodes 中填写联系方式。</p>";
     }
     box.innerHTML = html;
+
+    // 说明文字
+    var note = $("#contact-note");
+    if (note) {
+      if (has(SITE.contactNote)) { note.textContent = SITE.contactNote; }
+      else { note.remove(); }
+    }
   }
 
   /* ----------------------------------------------------------------------
@@ -876,41 +900,63 @@
 
   /* ----------------------------------------------------------------------
      一键复制联系方式
+     注意：无论成功或失败，都不把明文写回按钮文案 —— 否则会泄露到页面与 DOM 中
      ---------------------------------------------------------------------- */
+  var copyTimers = [];
+
+  function flashBtn(btn, text, ok) {
+    if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
+    // 清掉该按钮上尚未结束的定时器，避免连续点击时文案错乱
+    copyTimers = copyTimers.filter(function (t) {
+      if (t.btn === btn) { clearTimeout(t.id); return false; }
+      return true;
+    });
+    btn.textContent = text;
+    btn.classList.toggle("copy-ok", !!ok);
+    btn.classList.toggle("copy-fail", !ok);
+    var id = setTimeout(function () {
+      btn.textContent = btn.dataset.orig;
+      btn.classList.remove("copy-ok", "copy-fail");
+    }, 1800);
+    copyTimers.push({ id: id, btn: btn });
+  }
+
   function initCopy() {
     $$("[data-copy]").forEach(function (btn) {
+      if (btn.dataset.copyBound) return;      // 防止重复绑定
+      btn.dataset.copyBound = "1";
+
       btn.addEventListener("click", function () {
         var text = btn.getAttribute("data-copy");
-        var original = btn.textContent;
-
-        function done() {
-          btn.classList.add("copy-ok");
-          btn.textContent = "已复制 ✓";
-          setTimeout(function () {
-            btn.classList.remove("copy-ok");
-            btn.textContent = original;
-          }, 1800);
-        }
-        function fail() {
-          btn.textContent = text;
-          btn.classList.add("copy-ok");
-        }
+        if (!text) return;
+        var done = function () { flashBtn(btn, "已复制", true); };
+        var fail = function () { flashBtn(btn, "复制失败，请手动选择", false); };
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(done).catch(fail);
+          navigator.clipboard.writeText(text).then(done).catch(function () {
+            legacyCopy(text) ? done() : fail();
+          });
         } else {
-          // 兼容本地 file:// 打开时无剪贴板 API 的情况
-          var ta = document.createElement("textarea");
-          ta.value = text;
-          ta.style.position = "fixed";
-          ta.style.opacity = "0";
-          document.body.appendChild(ta);
-          ta.select();
-          try { document.execCommand("copy"); done(); } catch (err) { fail(); }
-          document.body.removeChild(ta);
+          legacyCopy(text) ? done() : fail();
         }
       });
     });
+  }
+
+  /** 兼容 file:// 打开时无剪贴板 API 的情况 */
+  function legacyCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
   }
 
   /* ----------------------------------------------------------------------

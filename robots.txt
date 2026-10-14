@@ -1,0 +1,95 @@
+# ==========================================================================
+# 本站为个人作品集，不希望被搜索引擎与 AI 训练爬虫收录
+# 注意：robots.txt 是「君子协定」，只对遵守规则的爬虫有效，
+#       恶意采集器会直接忽略它。因此本站同时使用了 meta noindex 与联系方式混淆。
+# ==========================================================================
+
+# —— 默认：全体爬虫不得收录 ——
+User-agent: *
+Disallow: /
+
+# —— 明确列出常见的搜索引擎与 AI 抓取器，防止它们忽略上面的通配规则 ——
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Sogou web spider
+Disallow: /
+
+User-agent: 360Spider
+Disallow: /
+
+User-agent: YisouSpider
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+# —— AI 训练数据抓取器 ——
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+# —— 归档类 ——
+User-agent: ia_archiver
+Disallow: /
+
+# 不提供 sitemap：本站不需要被索引

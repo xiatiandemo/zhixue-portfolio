@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
 <title>个人设计作品集 · AI 智能体系统架构设计</title>
 <meta name="description" content="个人设计作品集：展示 AI 智能体系统架构设计作品，含分层架构、能力拆解与闭环设计思路。">
 <meta name="author" content="作品集">
@@ -117,9 +120,10 @@
         <h2 class="section-title" id="contact-title">如果你也在做类似的事</h2>
         <p id="contact-text">欢迎交流 AI 智能体的架构设计、能力拆解与评测方法。</p>
 
-        <!-- 联系按钮由 script.js 依据 data/works.js 里的 SITE.email / wechat / github 生成，
-             填了哪个就显示哪个，留空的不显示 -->
+        <!-- 联系按钮由 script.js 依据 data/works.js 的 contactCodes 解码生成，
+             明文不出现在页面源码中 -->
         <div class="contact-actions" id="contact-actions"></div>
+        <p class="contact-note" id="contact-note"></p>
       </div>
     </div>
   </section>

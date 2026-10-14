@@ -639,6 +639,22 @@ li { margin-bottom: 0.4em; }
   color: var(--mint) !important;
   border-color: color-mix(in srgb, var(--mint) 42%, transparent) !important;
 }
+.copy-fail {
+  color: #ffb4b4 !important;
+  border-color: rgba(255, 120, 120, 0.45) !important;
+}
+
+/* 联系方式区的一行说明（提示已做防爬处理） */
+.contact-actions + .contact-note { margin-top: 26px; }
+.contact-note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-subtle);
+  max-width: 40em;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
 
 /* --------------------------------------------------------------------------
    10. 作品详情页
