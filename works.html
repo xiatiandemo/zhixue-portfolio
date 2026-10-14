@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全部作品 · 个人设计作品集</title>
+<meta name="description" content="全部设计作品列表：AI 智能体系统架构设计作品合集。">
+<meta name="theme-color" content="#080c18">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#works">跳到主要内容</a>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="index.html">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span data-site="name">月凌</span>
+      <span style="color:var(--text-subtle);font-weight:500" data-site="brand">作品集</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a class="is-active" href="works.html">全部作品</a></li>
+        <li><a href="index.html#about">关于我</a></li>
+        <li><a href="index.html#contact">联系方式</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="works">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Works</span>
+        <h2 class="section-title">全部作品</h2>
+        <p class="section-desc">
+          目前收录 <strong id="works-count">1</strong> 件作品。每件作品都按同一套结构整理，
+          方便横向对比设计思路。新作品会持续加入。
+        </p>
+      </div>
+
+      <div class="works-grid" id="works-page-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-site="year">2026</span> <span data-site="name">月凌</span> · 保留所有权利</span>
+    <span><a href="index.html">返回首页</a></span>
+  </div>
+</footer>
+
+<script src="data/works.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人设计作品集 · AI 智能体系统架构设计</title>
+<meta name="description" content="个人设计作品集：展示 AI 智能体系统架构设计作品，含分层架构、能力拆解与闭环设计思路。">
+<meta name="author" content="作品集">
+<meta name="theme-color" content="#080c18">
+<meta property="og:title" content="个人设计作品集 · AI 智能体系统架构设计">
+<meta property="og:description" content="把复杂的智能体系统拆成可落地的架构。">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#featured">跳到主要内容</a>
+
+<!-- ================= 顶部导航 ================= -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="index.html">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span data-site="name">月凌</span>
+      <span style="color:var(--text-subtle);font-weight:500" data-site="brand">作品集</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#featured">精选作品</a></li>
+        <li><a href="#works">全部作品</a></li>
+        <li><a href="#about">关于我</a></li>
+        <li><a href="#contact">联系方式</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= Hero ================= -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge reveal">
+        <span class="pulse" aria-hidden="true"></span>
+        <span id="hero-badge-text">AI 智能体 · 系统架构设计</span>
+      </div>
+
+      <h1 class="hero-title reveal" id="hero-title">
+        把复杂的智能体系统<br><span class="grad">拆成可落地的架构</span>
+      </h1>
+
+      <p class="hero-lead reveal" id="hero-lead">
+        我关注的是「从想法到可实现」这一段：把模糊的产品意图，翻译成有分层、有边界、
+        有数据契约的系统架构。
+      </p>
+
+      <div class="hero-actions reveal">
+        <a class="btn btn--primary" href="#featured">
+          查看作品 <span aria-hidden="true">↓</span>
+        </a>
+        <a class="btn btn--ghost" href="#contact">联系我</a>
+      </div>
+
+      <div class="hero-stats reveal" id="hero-stats"></div>
+    </div>
+  </section>
+
+  <!-- ================= 精选作品 ================= -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Featured</span>
+        <h2 class="section-title">精选作品</h2>
+        <p class="section-desc">每件作品都记录了完整的设计过程：要解决什么问题、为什么这样设计、以及还有哪些没解决。</p>
+      </div>
+
+      <div id="feature-slot"></div>
+    </div>
+  </section>
+
+  <!-- ================= 全部作品 ================= -->
+  <section class="section" id="works">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Works</span>
+        <h2 class="section-title">全部作品</h2>
+        <p class="section-desc">作品会持续扩充。每件作品都按同一套结构整理，方便横向对比设计思路。</p>
+      </div>
+
+      <div class="works-grid" id="works-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 关于我 ================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">About</span>
+        <h2 class="section-title">关于我</h2>
+        <p class="section-desc">我更愿意把自己描述成「把想法翻译成系统的人」。</p>
+      </div>
+
+      <div class="about-grid" id="about-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 联系方式 ================= -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-panel card reveal">
+        <span class="section-eyebrow">Contact</span>
+        <h2 class="section-title" id="contact-title">如果你也在做类似的事</h2>
+        <p id="contact-text">欢迎交流 AI 智能体的架构设计、能力拆解与评测方法。</p>
+
+        <!-- 联系按钮由 script.js 依据 data/works.js 里的 SITE.email / wechat / github 生成，
+             填了哪个就显示哪个，留空的不显示 -->
+        <div class="contact-actions" id="contact-actions"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= 页脚 ================= -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© <span data-site="year">2026</span> <span data-site="name">月凌</span> · 保留所有权利</span>
+    <span>本站为纯静态站点 · <a href="works.html">作品列表</a></span>
+  </div>
+</footer>
+
+<script src="data/works.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
